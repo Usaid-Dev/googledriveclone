@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:googledriveclone/screens/home_screen.dart';
+import 'package:googledriveclone/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,7 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              onPressed: () async {},
+              onPressed: () async {
+                AuthService().signInWithGoogle();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
             ),
           ),
         ],
