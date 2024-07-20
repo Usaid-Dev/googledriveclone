@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:googledriveclone/screens/home_screen.dart';
 import 'package:googledriveclone/services/auth_service.dart';
@@ -10,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,21 +67,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                     onPressed: () async {
-                      AuthService().signInWithGoogle();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),
-                      );
+                      UserCredential? userCredential =
+                          await _authService.signInWithGoogle();
+                      if (userCredential != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(
+                              url: userCredential.user?.photoURL ??
+                                  '', // Ensure you pass valid data
+                            ),
+                          ),
+                        );
+                      } else {
+                        // Handle sign-in failure
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content:
+                                  Text('Sign-In failed. Please try again.')),
+                        );
+                      }
                     },
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 50),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 50),
             child: Column(
               children: [
                 Text(
