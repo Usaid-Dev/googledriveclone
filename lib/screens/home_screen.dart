@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googledriveclone/Widgets/Drawer.dart';
+import 'package:googledriveclone/screens/upload.dart';
 import 'package:googledriveclone/widgets/delete_dailog.dart';
 import 'package:googledriveclone/widgets/information_dailog.dart';
 import 'login_screen.dart';
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
@@ -50,27 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
-        title: Padding(
-          padding: const EdgeInsets.only(left: 50, top: 20),
-          child: Row(
-            children: [
-              const Text(
-                'Drive ',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Clone',
-                style: TextStyle(
-                  color: Colors.yellow[700],
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
+        title: const Text(
+          'Drive Clone',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
           ),
         ),
         actions: [
@@ -110,8 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       document.data()! as Map<String, dynamic>;
                   return GestureDetector(
                     onTap: () {
-                      print(data['type']);
-                      print(document.id);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Upload(),
+                        ),
+                      );
                     },
                     child: ListTile(
                       leading: Icon(
