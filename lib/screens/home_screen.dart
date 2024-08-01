@@ -99,7 +99,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Upload(),
+                          builder: (context) => Upload(
+                            url: widget.url,
+                            did: document.id,
+                            type: data['type'],
+                          ),
                         ),
                       );
                     },
