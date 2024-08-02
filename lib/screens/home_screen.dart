@@ -11,10 +11,10 @@ import 'login_screen.dart';
 class HomeScreen extends StatefulWidget {
   final String url;
 
-  HomeScreen({
-    Key? key,
+  const HomeScreen({
+    super.key,
     required this.url,
-  }) : super(key: key);
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     User? user = _auth.currentUser;
-    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+    final Stream<QuerySnapshot> usersStream = FirebaseFirestore.instance
         .collection('users')
         .doc(user!.uid)
         .collection('folders')
@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot>(
-            stream: _usersStream,
+            stream: usersStream,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {

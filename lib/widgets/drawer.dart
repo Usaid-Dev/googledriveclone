@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import '../screens/login_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   final User? user;
   final GoogleSignIn googleSignIn;
 
-  CustomDrawer({required this.user, required this.googleSignIn});
+  const CustomDrawer({
+    super.key,
+    this.user,
+    required this.googleSignIn,
+  });
 
   @override
   Widget build(BuildContext context) {

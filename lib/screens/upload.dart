@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:googledriveclone/screens/home_screen.dart';
+import 'package:googledriveclone/widgets/imageview.dart';
 
 class Upload extends StatefulWidget {
   final String did;
@@ -125,7 +126,18 @@ class _UploadState extends State<Upload> {
                 children: documents.map((DocumentSnapshot document) {
                   final data = document.data() as Map<String, dynamic>;
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      if (type == 'Image') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => (ImageView(
+                              url: data['url'],
+                            )),
+                          ),
+                        );
+                      }
+                    },
                     child: ListTile(
                       leading: leadingIcon,
                       title: Text(data['name']),
