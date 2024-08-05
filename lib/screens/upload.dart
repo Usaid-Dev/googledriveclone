@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:googledriveclone/screens/home_screen.dart';
 import 'package:googledriveclone/widgets/imageview.dart';
+import 'package:googledriveclone/widgets/pdfview.dart';
 
 class Upload extends StatefulWidget {
   final String did;
@@ -132,6 +133,16 @@ class _UploadState extends State<Upload> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => (ImageView(
+                              url: data['url'],
+                            )),
+                          ),
+                        );
+                      }
+                      if (type == 'PDF') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => (PdfView(
                               url: data['url'],
                             )),
                           ),
