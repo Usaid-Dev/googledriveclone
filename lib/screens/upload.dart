@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:googledriveclone/screens/home_screen.dart';
 import 'package:googledriveclone/widgets/imageview.dart';
 import 'package:googledriveclone/widgets/pdfview.dart';
+import 'package:googledriveclone/widgets/videoplayer.dart';
 
 class Upload extends StatefulWidget {
   final String did;
@@ -143,6 +144,16 @@ class _UploadState extends State<Upload> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => (PdfView(
+                              url: data['url'],
+                            )),
+                          ),
+                        );
+                      }
+                      if (type == 'video') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => (VideoPlay(
                               url: data['url'],
                             )),
                           ),
